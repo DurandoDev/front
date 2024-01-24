@@ -1,0 +1,15 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #202020;
+}
+
+.card {
+    width: 350px;
+}
+
+#fullname, #username, #password {
+    width: 100%;
+}

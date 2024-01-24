@@ -1,0 +1,39 @@
+body{
+    background-color: #202020;
+}
+
+h1, h2 {
+    color: white;
+}
+
+.form-label{
+    color: white;
+}
+
+a, .nav-link{
+    color: white;
+}
+
+li{
+    margin-right: 10%;
+}
+td{
+    color: white;
+}
+
+nav{
+    width: 100%;
+}
+
+.user {
+    position: absolute;
+    color: white;
+    top: 45px;
+    right: 80px;
+}
+
+#logout {
+    position: absolute;
+    top: 10px;
+    right: 80px;
+}

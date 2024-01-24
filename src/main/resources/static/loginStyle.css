@@ -1,0 +1,22 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #202020;
+}
+
+.card {
+    width: 30%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.item {
+    display: inline-block;
+}
+
+.password{
+    margin-bottom: 5px;
+}
