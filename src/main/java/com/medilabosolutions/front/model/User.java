@@ -15,7 +15,7 @@ import java.util.Collections;
 @Table(name = "users")
 public class User implements UserDetails {
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@NotBlank(message = "Username is mandatory")
 	private String username;
@@ -52,3 +52,5 @@ public class User implements UserDetails {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
 		return Collections.singleton(authority);
 	}
+
+}
