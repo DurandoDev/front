@@ -4,6 +4,12 @@
     align-items: center;
     min-height: 100vh;
     background-color: #202020;
+    flex-direction: column;
+}
+
+.titre {
+    color: white;
+    margin-bottom: 20px;
 }
 
 .card {

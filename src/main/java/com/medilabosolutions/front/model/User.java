@@ -53,4 +53,14 @@ public class User implements UserDetails {
 		return Collections.singleton(authority);
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", fullname='" + fullname + '\'' +
+				", role=" + role +
+				'}';
+	}
 }

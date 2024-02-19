@@ -1,0 +1,16 @@
+header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+    color: #007bff;
+}
+
+.search-form {
+    max-width: 500px;
+    margin: auto;
+}

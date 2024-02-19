@@ -1,39 +1,26 @@
-body{
-    background-color: #202020;
+body {
+    background-color: #f5f5f5;
 }
 
-h1, h2 {
-    color: white;
+.container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-label{
-    color: white;
+h2 {
+    margin-bottom: 20px;
 }
 
-a, .nav-link{
-    color: white;
+.form-label {
+    margin-bottom: 5px;
 }
 
-li{
-    margin-right: 10%;
-}
-td{
-    color: white;
+.form-control {
+    margin-bottom: 10px;
 }
 
-nav{
+.btn-primary {
     width: 100%;
-}
-
-.user {
-    position: absolute;
-    color: white;
-    top: 45px;
-    right: 80px;
-}
-
-#logout {
-    position: absolute;
-    top: 10px;
-    right: 80px;
 }

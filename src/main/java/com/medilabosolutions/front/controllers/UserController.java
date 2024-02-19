@@ -1,9 +1,11 @@
 package com.medilabosolutions.front.controllers;
 
+import com.medilabosolutions.front.model.Patient;
 import com.medilabosolutions.front.model.Role;
 import com.medilabosolutions.front.model.User;
 import com.medilabosolutions.front.repositories.RoleRepository;
 import com.medilabosolutions.front.repositories.UserRepository;
+import com.medilabosolutions.front.services.PatientService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import reactor.core.publisher.Flux;
 
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
+
+	@Autowired
+	PatientService patientService;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -34,21 +42,37 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	@RequestMapping("/user/list")
-	public String home(Model model) {
-		model.addAttribute("users", userRepository.findAll());
-		return "user/list";
+	@GetMapping("/listUser")
+	public List<User> userList(Model model) {
+		List<User> users = userRepository.findAll();
+		return users;
 	}
+
+	@PostMapping("/users")
+	public String addUser(@Valid User user, BindingResult result) {
+		if (result.hasErrors()) {
+			return "/signup";
+		}
+
+		user.setPassword(encoder.encode(user.getPassword()));
+		Role role = roleRepository.findByName("USER").orElse(new Role("USER"));
+		user.setRole(role);
+		userRepository.save(user);
+		return "redirect:/login";
+	}
+
+	@GetMapping("/signup")
+	public String showUserForm(Model model) {
+		model.addAttribute("user", new User());
+		return "signup";
+	}
+
 
 	@GetMapping("/login")
 	public String login() {
 		return "/login";
 	}
 
-//	@PostMapping("/login")
-//	public String Login() {
-//		return "/home";
-//	}
 
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -57,25 +81,6 @@ public class UserController {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/login?logout";
-	}
-
-
-	@GetMapping("/add")
-	public String showUserForm(User bid) {
-		return "/add";
-	}
-
-	@PostMapping("/add")
-	public String addUser(@Valid User user, BindingResult result) {
-		if (result.hasErrors()) {
-			return "/add";
-		}
-
-		user.setPassword(encoder.encode(user.getPassword()));
-		Role role = roleRepository.findByName("USER").orElse(new Role("USER"));
-		user.setRole(role);
-		userRepository.save(user);
-		return "redirect:/login";
 	}
 
 	@GetMapping("/update/{id}")
@@ -108,7 +113,11 @@ public class UserController {
 
 
 	@GetMapping("/home")
-	public String home(){
+	public String home(Model model, Principal principal){
+		String userName = principal.getName();
+		model.addAttribute("userName", userName);
+		Flux<Patient> patients = patientService.getPatients();
+		model.addAttribute("patients", patients.collectList().block());
 		return "home";
 	}
 }

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un nouveau patient</title>
+    <title>Mettre à jour les informations du patient</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/addStyle.css}">
 </head>
@@ -17,43 +16,44 @@
 </header>
 
 <div class="container mt-4">
-    <h2>Ajouter un nouveau patient</h2>
-    <form th:action="@{/patients}" method="post">
+    <h2>Mettre à jour le patient</h2>
+    <form th:action="@{/patients/update/{id}(id=${patient.id})}" th:object="${patient}" method="post">
+        <input type="hidden" th:field="*{id}" />
         <div class="mb-3">
             <label for="firstname" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" required>
+            <input type="text" class="form-control" id="firstname" name="firstname" th:value="*{firstname}" required>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <input type="text" class="form-control" id="name" name="name" th:value="*{name}" required>
         </div>
         <div class="mb-3">
             <label for="dateOfBirth" class="form-label">Date de naissance</label>
-            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:value="*{dateOfBirth}" required>
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label">Genre</label>
-            <select class="form-select" id="gender" name="gender" required>
+            <select class="form-select" id="gender" name="gender" th:value="*{gender}" required>
                 <option value="">Choisir...</option>
-                <option value="F">Féminin</option>
-                <option value="M">Masculin</option>
-                <option value="O">Autre</option>
+                <option value="F" th:selected="*{gender} == 'F'">Féminin</option>
+                <option value="M" th:selected="*{gender} == 'M'">Masculin</option>
+                <option value="O" th:selected="*{gender} == 'O'">Autre</option>
             </select>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Adresse</label>
-            <input type="text" class="form-control" id="address" name="address" required>
+            <input type="text" class="form-control" id="address" name="address" th:value="*{address}" required>
         </div>
         <div class="mb-3">
             <label for="phoneNumber" class="form-label">Numéro de téléphone</label>
-            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
+            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:value="*{phoneNumber}" required>
         </div>
         <div class="row">
             <div class="col-6 pe-1">
                 <a href="/home" class="btn btn-secondary w-100">Annuler</a>
             </div>
             <div class="col-6 ps-1">
-                <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+                <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
             </div>
         </div>
     </form>
