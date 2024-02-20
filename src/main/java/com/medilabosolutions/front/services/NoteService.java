@@ -1,6 +1,7 @@
 package com.medilabosolutions.front.services;
 
 import com.medilabosolutions.front.model.Note;
+import com.medilabosolutions.front.model.Patient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -22,5 +23,13 @@ public class NoteService {
 				.bodyToFlux(Note.class);
 	}
 
+	public void addNote(Note note) {
+		webClient.post()
+				.uri("/notes")
+				.bodyValue(note)
+				.retrieve()
+				.bodyToMono(Void.class)
+				.block();
+	}
 
 }

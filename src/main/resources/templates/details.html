@@ -24,16 +24,19 @@
         </div>
     </div>
     <h4>Ajouter une note</h4>
-    <form th:action="@{/notes/add}" method="post">
+    <form th:action="@{/notes}" method="post">
+        <input type="hidden" name="patId" th:value="${patient.id}" />
+        <input type="hidden" name="firstname" th:value="${patient.firstname}" />
         <div class="mb-3">
-            <textarea class="form-control" name="content" placeholder="Contenu de la note"></textarea>
+            <label for="noteContent" class="form-label">Note</label>
+            <textarea class="form-control" id="noteContent" name="note" placeholder="Contenu de la note"></textarea>
         </div>
-        <input type="hidden" name="patientId" th:value="${patient.id}">
         <div class="d-flex justify-content-between">
             <a href="/home" class="btn btn-secondary">Retour</a>
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
     </form>
+
 </div>
 </body>
 </html>
