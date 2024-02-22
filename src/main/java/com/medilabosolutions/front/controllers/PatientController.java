@@ -2,6 +2,7 @@ package com.medilabosolutions.front.controllers;
 
 import com.medilabosolutions.front.model.Note;
 import com.medilabosolutions.front.model.Patient;
+import com.medilabosolutions.front.services.DiabeteRiskService;
 import com.medilabosolutions.front.services.NoteService;
 import com.medilabosolutions.front.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,13 @@ public class PatientController {
 
 	private final NoteService noteService;
 
+	private final DiabeteRiskService diabeteRiskService;
+
 	@Autowired
-	public PatientController(PatientService patientService, NoteService noteService) {
+	public PatientController(PatientService patientService, NoteService noteService, DiabeteRiskService diabeteRiskService) {
 		this.patientService = patientService;
 		this.noteService = noteService;
+		this.diabeteRiskService = diabeteRiskService;
 	}
 
 
@@ -66,6 +70,10 @@ public class PatientController {
 		// Récupérer les notes du patient
 		List<Note> notesList = noteService.getNotesByPatientId(id).collectList().block();
 		model.addAttribute("notes", notesList);
+
+		// Récupérer le niveau de risque de diabète
+		String riskLevel = diabeteRiskService.determineRiskLevel(id).block();
+		model.addAttribute("riskLevel", riskLevel);
 
 
 		return "details";

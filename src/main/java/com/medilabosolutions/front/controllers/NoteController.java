@@ -1,7 +1,6 @@
 package com.medilabosolutions.front.controllers;
 
 import com.medilabosolutions.front.model.Note;
-import com.medilabosolutions.front.model.Patient;
 import com.medilabosolutions.front.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

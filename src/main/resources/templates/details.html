@@ -17,6 +17,10 @@
         <p><strong>Adresse :</strong> <span th:text="${patient.address}"></span></p>
         <p><strong>Numéro de téléphone :</strong> <span th:text="${patient.phoneNumber}"></span></p>
     </div>
+    <div class="risk-level">
+        <h3>Niveau de risque de diabète</h3>
+        <p th:text="${riskLevel}"></p>
+    </div>
     <h3>Notes</h3>
     <div th:each="note : ${notes}">
         <div class="note">
