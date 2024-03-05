@@ -64,6 +64,5 @@ public class PatientService {
 				.bodyToMono(Patient.class);
 	}
 
-
 }
 

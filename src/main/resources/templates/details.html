@@ -30,7 +30,7 @@
     <h4>Ajouter une note</h4>
     <form th:action="@{/notes}" method="post">
         <input type="hidden" name="patId" th:value="${patient.id}" />
-        <input type="hidden" name="firstname" th:value="${patient.firstname}" />
+        <input type="hidden" name="patient" th:value="${patient.firstname}" />
         <div class="mb-3">
             <label for="noteContent" class="form-label">Note</label>
             <textarea class="form-control" id="noteContent" name="note" placeholder="Contenu de la note"></textarea>
