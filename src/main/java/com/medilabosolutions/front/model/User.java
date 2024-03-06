@@ -16,7 +16,7 @@ import java.util.Collections;
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	@NotBlank(message = "Username is mandatory")
 	private String username;
 	@NotBlank(message = "Password is mandatory")
