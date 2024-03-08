@@ -13,7 +13,7 @@ public class PatientService {
 	private final WebClient webClient;
 
 	public PatientService(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
+		this.webClient = webClientBuilder.baseUrl("http://gateway:8080").build();
 	}
 
 	public Flux<Patient> getPatients() {
