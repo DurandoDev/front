@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 public class Patient {
 
-	int id;
+	Integer id;
 
 	@NotBlank(message = "Firstname is mandatory")
 	String firstname;

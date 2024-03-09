@@ -10,7 +10,7 @@ public class DiabeteRiskService {
 	private final WebClient webClient;
 
 	public DiabeteRiskService(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("http://localhost:8084").build();
+		this.webClient = webClientBuilder.baseUrl("http://gateway:8080").build();
 	}
 
 	public Mono<String> determineRiskLevel(int patientId) {

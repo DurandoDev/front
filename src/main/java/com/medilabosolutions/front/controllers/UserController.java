@@ -51,14 +51,14 @@ public class UserController {
 	@PostMapping("/users")
 	public String addUser(@Valid User user, BindingResult result) {
 		if (result.hasErrors()) {
-			return "/signup";
+			return "signup";
 		}
 
 		user.setPassword(encoder.encode(user.getPassword()));
 		Role role = roleRepository.findByName("USER").orElse(new Role("USER"));
 		user.setRole(role);
 		userRepository.save(user);
-		return "redirect:/login";
+		return "redirect:login";
 	}
 
 	@GetMapping("/signup")
@@ -70,7 +70,7 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String login() {
-		return "/login";
+		return "login";
 	}
 
 
@@ -80,7 +80,7 @@ public class UserController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/login?logout";
+		return "redirect:login?logout";
 	}
 
 	@GetMapping("/update/{id}")
@@ -88,19 +88,19 @@ public class UserController {
 		User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		user.setPassword("");
 		model.addAttribute("user", user);
-		return "/update";
+		return "update";
 	}
 
 	@PostMapping("/update/{id}")
-	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult result, Model model) {
+	public String updateUser(@PathVariable("id") Long id, @Valid User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "/update";
+			return "update";
 		}
 
 		user.setId(id);
 		userRepository.save(user);
 		model.addAttribute("users", userRepository.findAll());
-		return "redirect:/user/list";
+		return "redirect:user/list";
 	}
 
 	@GetMapping("/delete/{id}")
@@ -108,7 +108,7 @@ public class UserController {
 		User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		userRepository.delete(user);
 		model.addAttribute("users", userRepository.findAll());
-		return "redirect:/user/list";
+		return "redirect:user/list";
 	}
 
 

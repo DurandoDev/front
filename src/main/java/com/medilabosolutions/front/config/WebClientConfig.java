@@ -9,6 +9,6 @@ public class WebClientConfig {
 	@Bean
 	public WebClient.Builder webClientBuilder(){
 		return WebClient.builder()
-				.baseUrl("http://localhost:8080");
+				.baseUrl("http://gateway:8080");
 	}
 }

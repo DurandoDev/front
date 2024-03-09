@@ -13,7 +13,7 @@ public class NoteService {
 	private final WebClient webClient;
 
 	public NoteService(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("http://localhost:8083").build();
+		this.webClient = webClientBuilder.baseUrl("http://gateway:8080").build();
 	}
 
 	public Flux<Note> getNotesByPatientId(int patientId) {
