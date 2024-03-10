@@ -1,11 +1,9 @@
 package com.medilabosolutions.front.services;
 
 import com.medilabosolutions.front.model.Note;
-import com.medilabosolutions.front.model.Patient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 public class NoteService {

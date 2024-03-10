@@ -4,7 +4,6 @@ import com.medilabosolutions.front.model.Role;
 import com.medilabosolutions.front.model.User;
 import com.medilabosolutions.front.repositories.RoleRepository;
 import com.medilabosolutions.front.repositories.UserRepository;
-import com.medilabosolutions.front.services.PatientService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
