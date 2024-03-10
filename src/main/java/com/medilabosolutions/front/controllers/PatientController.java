@@ -32,6 +32,7 @@ public class PatientController {
 
 
 	@GetMapping("/patients")
+	@ResponseBody
 	public String listPatients(Model model) {
 		Flux<Patient> patients = patientService.getPatients();
 		model.addAttribute("patients", patients.collectList().block());

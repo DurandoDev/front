@@ -18,6 +18,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -41,11 +44,10 @@ public class UserControllerTest {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	@Autowired
-	private PatientService patientService;
+	private List<Long> createdUserIds = new ArrayList<>();
 
 	@BeforeEach
-	public void init(){
+	public void init() {
 		Role role = roleRepository.findByName("USER").orElseGet(() -> {
 			Role newRole = new Role("USER");
 			roleRepository.save(newRole);
@@ -57,15 +59,18 @@ public class UserControllerTest {
 		user.setUsername("test");
 		user.setPassword(encoder.encode("testPassword"));
 		user.setRole(role);
-		userRepository.save(user);
+		User savedUser = userRepository.save(user);
+		createdUserIds.add(savedUser.getId());
 	}
-
-
 
 	@AfterEach
-	public void clean(){
-		userRepository.deleteAll();
+	public void clean() {
+		for (Long userId : createdUserIds) {
+			userRepository.deleteById(userId);
+		}
+		createdUserIds.clear();
 	}
+
 
 	@Test
 	public void testShowSignupForm() throws Exception {
@@ -92,6 +97,7 @@ public class UserControllerTest {
 						.with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("login"));
+		userRepository.findByUsername("testUsername").ifPresent(user -> userRepository.delete(user));
 	}
 
 
